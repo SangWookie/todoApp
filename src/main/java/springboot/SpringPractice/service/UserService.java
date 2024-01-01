@@ -9,4 +9,5 @@ public interface UserService {
     UserEntity findById(long pid);
     UserEntity save(UserEntity user);
     void deleteById(long pid);
+    String signin(UserEntity user);
 }

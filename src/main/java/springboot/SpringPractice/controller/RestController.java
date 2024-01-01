@@ -24,8 +24,9 @@ public class RestController {
         return userService.save(userEntity).toString();
     }
 
-//    @PostMapping("/signin")
-//    public String signin(@RequestBody){
-//
-//    }
+    @PostMapping("/signin")
+    public String signin(@RequestBody UserEntity userEntity){
+
+        return userService.signin(userEntity);
+    }
 }

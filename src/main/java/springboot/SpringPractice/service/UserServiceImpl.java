@@ -43,4 +43,16 @@ public class UserServiceImpl implements UserService {
     public void deleteById(long pid) {
         userRepository.deleteById(pid);
     }
+
+    @Override
+    public String signin(UserEntity user) {
+        List<UserEntity> result = userRepository.findByEmail(user.getEmail());
+        if (result.isEmpty()){
+            return "no result";
+        }
+        else {
+            UserEntity userEntity = result.get(0);
+            return userEntity.toString();
+        }
+    }
 }
