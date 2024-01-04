@@ -45,14 +45,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String signin(UserEntity user) {
+    public boolean signin(UserEntity user) {
         List<UserEntity> result = userRepository.findByEmail(user.getEmail());
-        if (result.isEmpty()){
-            return "no result";
-        }
-        else {
-            UserEntity userEntity = result.get(0);
-            return userEntity.toString();
+        if (result.isEmpty()) {
+            return false;
+        } else {
+            UserEntity resultEntity = result.get(0);
+            if (resultEntity.getPassword().equals(user.getPassword()))
+                return true;
+            else return false;
         }
     }
 }
