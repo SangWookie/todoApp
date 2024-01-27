@@ -3,6 +3,8 @@ package springboot.SpringPractice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -22,8 +24,8 @@ public class UserEntity {
     @Column(name = "password", nullable = false, unique = true)
     private String password;
 
-    public UserEntity(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
+    @OneToMany(mappedBy = "author")
+    @Column(name = "todo_list")
+    private List<TodoEntity> todoEntityList;
+
 }
