@@ -3,6 +3,7 @@ package springboot.SpringPractice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springboot.SpringPractice.DAO.UserRepository;
+import springboot.SpringPractice.VO.UserVO;
 import springboot.SpringPractice.entity.UserEntity;
 
 import java.util.List;
@@ -35,8 +36,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity save(UserEntity user) {
-        return userRepository.save(user);
+    public UserEntity save(UserVO user) {
+        UserEntity userEntity = UserEntity.builder()
+                .email(user.getEmail()).
+                password(user.getPassword())
+                .build();
+        return userRepository.save(userEntity);
     }
 
     @Override

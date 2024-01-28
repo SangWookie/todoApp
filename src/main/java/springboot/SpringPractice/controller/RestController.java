@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import springboot.SpringPractice.VO.UserVO;
 import springboot.SpringPractice.entity.UserEntity;
 import springboot.SpringPractice.service.UserService;
 
@@ -20,8 +21,8 @@ public class RestController {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody UserEntity userEntity) {
-        return userService.save(userEntity).toString();
+    public String signup(@RequestBody UserVO userVO) {
+        return userService.save(userVO).toString();
     }
 
 
