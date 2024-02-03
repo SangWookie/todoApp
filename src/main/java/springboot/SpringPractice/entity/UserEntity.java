@@ -3,6 +3,7 @@ package springboot.SpringPractice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,6 +27,6 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "author")
     @Column(name = "todo_list")
-    private List<TodoEntity> todoEntityList;
+    private List<TodoEntity> todoEntityList = new ArrayList<>();
 
 }

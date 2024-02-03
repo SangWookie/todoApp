@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import springboot.SpringPractice.DTO.TodoDTO;
 
 @Entity
 @Builder
@@ -31,4 +32,12 @@ public class TodoEntity {
     @ManyToOne
     @JoinColumn(name = "pid")
     private UserEntity author;
+
+    public TodoDTO toTodoDTO() {
+        return TodoDTO.builder()
+                .title(this.title)
+                .detail(this.detail)
+                .isDone(this.isDone)
+                .build();
+    }
 }
