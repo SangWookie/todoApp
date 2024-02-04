@@ -35,6 +35,7 @@ public class TodoEntity {
 
     public TodoDTO toTodoDTO() {
         return TodoDTO.builder()
+                .id(this.id)
                 .title(this.title)
                 .detail(this.detail)
                 .isDone(this.isDone)

@@ -9,6 +9,7 @@ import springboot.SpringPractice.entity.TodoEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TodoDTO {
+    Long id;
     String title;
     String detail;
     String authorEmail;

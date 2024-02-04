@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import springboot.SpringPractice.DTO.TodoDTO;
 import springboot.SpringPractice.VO.UserVO;
 import springboot.SpringPractice.entity.TodoEntity;
+import springboot.SpringPractice.service.TodoService;
 import springboot.SpringPractice.service.UserServiceImpl;
 
 import java.util.List;
@@ -18,9 +19,11 @@ import java.util.List;
 public class RestController {
 
     private final UserServiceImpl userService;
+    private final TodoService todoService;
 
-    public RestController(UserServiceImpl userService) {
+    public RestController(UserServiceImpl userService, TodoService todoService) {
         this.userService = userService;
+        this.todoService = todoService;
     }
 
     @GetMapping("/hello")
@@ -48,6 +51,16 @@ public class RestController {
     public String saveTodo(TodoDTO todoDTO) {
         userService.saveTodo(todoDTO);
         return "saved todo";
+    }
+
+    @DeleteMapping("/todo")
+    public String deleteTodo(Long id) {
+        boolean result = todoService.deleteTodo(id);
+        if (result) {
+            return "delete successful";
+        } else {
+            return "unable to delete";
+        }
     }
 
     @GetMapping("/alive")
