@@ -98,7 +98,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.Main</mainClass>
+                            <mainClass>springboot.SpringPractice.SpringPracticeApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
