@@ -68,8 +68,9 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/hello", "/signup","/login","/alive","/","/todo").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/hello", "/signup","/login","/alive","/", "roleInit").permitAll()
+                        .requestMatchers("/manage/**").hasRole("MANAGER")
+                        .requestMatchers("/todo").hasRole("USER")
                         .requestMatchers(PERMIT_URL_ARRAY).permitAll()
                         .anyRequest().authenticated());
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -25,8 +26,15 @@ public class UserEntity {
     @Column(name = "password", nullable = false, unique = true)
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "pid"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Collection<Role> roles;
+
     @OneToMany(mappedBy = "author")
     @Column(name = "todo_list")
     private List<TodoEntity> todoEntityList = new ArrayList<>();
-
 }

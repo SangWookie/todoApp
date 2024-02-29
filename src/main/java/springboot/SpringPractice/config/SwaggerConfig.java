@@ -50,8 +50,8 @@ public class SwaggerConfig {
         return (operation, handlerMethod) -> {
             operation.addParametersItem(new Parameter()
                     .in(ParameterIn.HEADER.toString())
-                    .schema(new StringSchema().name("Refresh-Token"))
-                    .name("Refresh-Token"));
+                    .schema(new StringSchema().name("Access-Token"))
+                    .name("Access-Token"));
             return operation;
         };
     }
