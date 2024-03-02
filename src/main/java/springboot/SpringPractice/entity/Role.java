@@ -1,23 +1,13 @@
 package springboot.SpringPractice.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-import java.util.Collection;
-
-@Entity
-@Builder
 @AllArgsConstructor
-@NoArgsConstructor
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@Getter
+public enum Role {
+    ADMIN("ROLE_ADMIN"),
+    USER("ROLE_USER");
 
-    String name;
-
-    @ManyToMany(mappedBy = "roles")
-    private Collection<UserEntity> users;
+    private String value;
 }

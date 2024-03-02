@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import springboot.SpringPractice.DTO.TodoDTO;
 import springboot.SpringPractice.VO.UserVO;
 import springboot.SpringPractice.entity.TodoEntity;
-import springboot.SpringPractice.service.RoleService;
 import springboot.SpringPractice.service.TodoService;
 import springboot.SpringPractice.service.UserServiceImpl;
 
@@ -21,12 +20,10 @@ public class RestController {
 
     private final UserServiceImpl userService;
     private final TodoService todoService;
-    private final RoleService roleService;
 
-    public RestController(UserServiceImpl userService, TodoService todoService, RoleService roleService) {
+    public RestController(UserServiceImpl userService, TodoService todoService) {
         this.userService = userService;
         this.todoService = todoService;
-        this.roleService = roleService;
     }
 
     @GetMapping("/hello")
@@ -42,19 +39,6 @@ public class RestController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserVO userVO){
         return null;
-    }
-
-    @PostMapping("/roleInit")
-    public String addRole(@RequestBody String role){
-        String firstRole = "ROLE_USER";
-        String secondRole = "ROLE_ADMIN";
-        if (roleService.findByName(firstRole) != null){
-            return "no init";
-        }
-        roleService.save(firstRole);
-        roleService.save(secondRole);
-
-        return role;
     }
 
     @GetMapping("/")

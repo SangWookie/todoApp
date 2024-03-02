@@ -7,8 +7,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springboot.SpringPractice.DTO.CustomUserDetails;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -36,13 +40,19 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+
         String username = customUserDetails.getUsername();
-        String role = username;
 
-        String accessToken = jwtUtil.createAccessJwt(username, role, 60 * 60 * 10L); //1 hour
-        String refreshToken = jwtUtil.createRefreshJwt(username, 7 * 24 * 60 * 60 * 10L); //1 week
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
+        GrantedAuthority auth = iterator.next();
 
-        response.addHeader("Authorization", "Bearer " + accessToken + " " + refreshToken);
+        String role = auth.getAuthority();
+
+        String accessToken = jwtUtil.createAccessJwt(username, role, 60 * 60 * 100L); //1 hour
+//        String refreshToken = jwtUtil.createRefreshJwt(username, 7 * 24 * 60 * 60 * 10L); //1 week
+
+        response.addHeader("Authorization", "Bearer " + accessToken);
     }
 
     //로그인 실패시 실행하는 메소드

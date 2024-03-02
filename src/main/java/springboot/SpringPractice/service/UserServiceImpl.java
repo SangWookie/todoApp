@@ -8,10 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import springboot.SpringPractice.DAO.UserRepository;
 import springboot.SpringPractice.DTO.TodoDTO;
 import springboot.SpringPractice.VO.UserVO;
+import springboot.SpringPractice.entity.Role;
 import springboot.SpringPractice.entity.TodoEntity;
 import springboot.SpringPractice.entity.UserEntity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +60,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = UserEntity.builder()
                 .email(user.getEmail())
                 .password(bCryptPasswordEncoder.encode(user.getPassword()))
+                .role(Role.USER.getValue())
                 .build();
         return userRepository.save(userEntity);
     }
@@ -103,7 +106,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("No todos found with email : " + email);
 
         List<TodoDTO> todoDTOS = new ArrayList<>();
-        for (TodoEntity todoEntity : todoList){
+        for (TodoEntity todoEntity : todoList) {
             TodoDTO todoDTO = todoEntity.toTodoDTO();
             todoDTOS.add(todoDTO);
         }
