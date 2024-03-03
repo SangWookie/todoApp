@@ -46,7 +46,7 @@ public class RestController {
     }
 
     @GetMapping("/todo")
-    public ResponseEntity<List<TodoDTO>> getTodo(String email) {
+    public ResponseEntity<List<TodoDTO>> getTodo(@RequestBody String email) {
         return new ResponseEntity<>(userService.findTodoByEmail(email), HttpStatus.ACCEPTED);
     }
 
