@@ -82,13 +82,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Transactional
     public TodoEntity saveTodo(TodoDTO todoDTO) {
+
         UserEntity user = userRepository.findByEmail(todoDTO.getAuthorEmail());
+
+        if (user == null)
+            return null;
+
         TodoEntity todo = TodoEntity.builder()
                 .title(todoDTO.getTitle())
                 .detail(todoDTO.getDetail())
-                .isDone(todoDTO.getIsDone())
+                .isDone(false)
                 .author(user)
                 .build();
 

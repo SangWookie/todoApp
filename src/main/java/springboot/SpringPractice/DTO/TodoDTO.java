@@ -8,6 +8,7 @@ import springboot.SpringPractice.entity.TodoEntity;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class TodoDTO {
     Long id;
     String title;

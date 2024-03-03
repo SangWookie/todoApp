@@ -40,16 +40,16 @@ public class JWTFilter extends OncePerRequestFilter {
         //Bearer 부분 제거 후 순수 토큰만 획득
         String accessToken = authorization.split(" ")[1];
 
-        //토큰에서 username과 role 획득
-        String username = jwtUtil.getUsername(accessToken);
-        String role = jwtUtil.getRole(accessToken);
-
         //access 토큰 소멸 시간 검증
         if (jwtUtil.isExpired(accessToken)) {
             System.out.println("token expired");
             filterChain.doFilter(request, response);
             return;
         }
+
+        //토큰에서 username과 role 획득
+        String username = jwtUtil.getUsername(accessToken);
+        String role = jwtUtil.getRole(accessToken);
 
         //userEntity를 생성하여 값 set
         UserEntity userEntity = UserEntity.builder()
@@ -65,7 +65,7 @@ public class JWTFilter extends OncePerRequestFilter {
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
         //세션에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
-
+        System.out.println("role : " + role);
         filterChain.doFilter(request, response);
     }
 }

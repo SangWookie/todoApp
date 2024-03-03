@@ -1,7 +1,5 @@
 package springboot.SpringPractice.controller;
 
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +35,7 @@ public class RestController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserVO userVO){
+    public ResponseEntity<?> login(@RequestBody UserVO userVO) {
         return null;
     }
 
@@ -53,9 +51,13 @@ public class RestController {
     }
 
     @PostMapping("/todo")
-    public String saveTodo(TodoDTO todoDTO) {
-        userService.saveTodo(todoDTO);
-        return "saved todo";
+    public String saveTodo(@RequestBody TodoDTO todoDTO) {
+//        System.out.println(todoDTO.toString());
+        TodoEntity todo = userService.saveTodo(todoDTO);
+        if (todo != null)
+            return "saved todo";
+        else
+            return "not saved";
     }
 
     @DeleteMapping("/todo")

@@ -1,10 +1,7 @@
 package springboot.SpringPractice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import springboot.SpringPractice.DTO.TodoDTO;
 
 @Entity
@@ -13,6 +10,7 @@ import springboot.SpringPractice.DTO.TodoDTO;
 @NoArgsConstructor
 @Getter
 @Table(name = "todos")
+@ToString
 public class TodoEntity {
 
     @Id

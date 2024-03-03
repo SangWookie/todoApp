@@ -19,10 +19,13 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         Collection<GrantedAuthority> collection = new ArrayList<>();
+
         collection.add(new GrantedAuthority() {
+
             @Override
             public String getAuthority() {
-                return userEntity.getEmail();
+
+                return userEntity.getRole();
             }
         });
 
